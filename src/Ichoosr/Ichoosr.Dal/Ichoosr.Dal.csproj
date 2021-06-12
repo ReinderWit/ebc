@@ -8,4 +8,10 @@
     <ProjectReference Include="..\Ichoosr.Domain\Ichoosr.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\cameras.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
