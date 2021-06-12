@@ -9,7 +9,7 @@
 
 <h1>Security cameras Utrecht</h1>
 <div id="map"></div>
-<script>@Html.Raw(Model.CamerasJson)</script>
+<script>var cameras = @Html.Raw(Model.Cameras)</script>
 <div id="source">
     source:
     <a href="https://data.overheid.nl/dataset/camera-s">https://data.overheid.nl/dataset/camera-s</a>
@@ -56,6 +56,15 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                             </tr>
+                            @foreach (var camera in fives)
+                            {
+                                <tr>
+                                    <td>@camera.Number</td>
+                                    <td>@camera.Name</td>
+                                    <td>@camera.Latitude</td>
+                                    <td>@camera.Longitude</td>
+                                </tr>
+                            }
                         </thead>
                         <tbody>
                         </tbody>
@@ -73,6 +82,15 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                             </tr>
+                            @foreach (var camera in threeFives)
+                            {
+                                <tr>
+                                    <td>@camera.Number</td>
+                                    <td>@camera.Name</td>
+                                    <td>@camera.Latitude</td>
+                                    <td>@camera.Longitude</td>
+                                </tr>
+                            }
                         </thead>
                         <tbody>
                         </tbody>
@@ -90,6 +108,15 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                             </tr>
+                            @foreach (var camera in other)
+                            {
+                                <tr>
+                                    <td>@camera.Number</td>
+                                    <td>@camera.Name</td>
+                                    <td>@camera.Latitude</td>
+                                    <td>@camera.Longitude</td>
+                                </tr>
+                            }
                         </thead>
                         <tbody>
                         </tbody>
