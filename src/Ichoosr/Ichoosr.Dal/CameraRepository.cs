@@ -38,7 +38,7 @@ namespace Ichoosr.Dal
 
                         _cameras.Add(new Camera
                         {
-                            Id = id,
+                            Number = id,
                             Name = parts[0],
                             Latitude = Double.Parse(parts[1]),
                             Longitude = Double.Parse(parts[2])

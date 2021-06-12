@@ -41,7 +41,7 @@ table tr:nth-child(2) th {
 h1 {
     padding: 20px 0 20px 55px;
     margin: 0 0 0 20px;
-    background: url("video-camera-icon.png") no-repeat;
+    background: url("/images/video-camera-icon.png") no-repeat;
     background-size: 40px;
     background-position: 0 50%;
 }

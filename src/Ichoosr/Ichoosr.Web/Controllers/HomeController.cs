@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -48,9 +49,21 @@ namespace Ichoosr.Web.Controllers
             {
                 using var responseStream = await response.Content.ReadAsStreamAsync();
                 model.Cameras = await JsonSerializer.DeserializeAsync<IEnumerable<Camera>>(responseStream);
+                model.CamerasJson = await GetJson(model.Cameras.ToString());
             }
 
             return model;
+        }
+
+        private static async Task<string> GetJson(object obj)
+        {
+            using (var stream = new MemoryStream())
+            {
+                await JsonSerializer.SerializeAsync(stream, obj, obj.GetType());
+                stream.Position = 0;
+                using var reader = new StreamReader(stream);
+                return await reader.ReadToEndAsync();
+            }
         }
     }
 }
