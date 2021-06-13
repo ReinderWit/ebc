@@ -13,5 +13,5 @@ for (var i = 0; i < cameras.length; i++) {
     var obj = cameras[i];
     console.log(obj['Latitude']);
     var marker = L.marker([obj['Latitude'], obj['Longitude']]).addTo(mymap);
-    marker.bindPopup(`<b>${obj['Name']}</b><br>${obj['Number']}`).openPopup();
+    marker.bindPopup(`<b>${obj['Name']}</b><br>${obj['Number']}`);
 }
