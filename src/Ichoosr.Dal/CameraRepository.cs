@@ -3,7 +3,6 @@ using Ichoosr.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -25,25 +24,23 @@ namespace Ichoosr.Dal
 
         private void ReadCsv()
         {
-            var lines = File.ReadAllLines(@"C:\Users\reind\Documents\ebc\src\Ichoosr.Dal\bin\Debug\net5.0\Data\cameras.csv");
-            foreach (var line in lines.Skip(1))
+            using var reader = new StreamReader(@"C:\Users\reind\Documents\ebc\src\Ichoosr.Dal\bin\Debug\net5.0\Data\cameras.csv");
+            while (!reader.EndOfStream)
             {
-                var parts = line.Split(';');
-                if (parts.Length == 3)
-                {
-                    var matches = Regex.Match(parts[0], "[A-Z]{3}-[A-Z]{2}-([0-9]{3}) ");
-                    if (matches.Success && matches.Groups.Count == 2)
-                    {
-                        var id = Int32.Parse(matches.Groups[1].Value);
+                var line = reader.ReadLine();
+                var matches = Regex.Match(line, "[A-Z]{3}-[A-Z]{2}-([0-9]{3})([^;]+);([^;]+);(.+)");
 
-                        _cameras.Add(new Camera
-                        {
-                            Number = id,
-                            Name = parts[0],
-                            Latitude = Double.Parse(parts[1]),
-                            Longitude = Double.Parse(parts[2])
-                        });
-                    }
+                if (matches.Success && matches.Groups.Count == 5)
+                {
+                    var id = Int32.Parse(matches.Groups[1].Value);
+
+                    _cameras.Add(new Camera
+                    {
+                        Number = id,
+                        Name = matches.Groups[2].Value.Trim(),
+                        Latitude = Double.Parse(matches.Groups[3].Value),
+                        Longitude = Double.Parse(matches.Groups[4].Value)
+                    });
                 }
             }
         }
