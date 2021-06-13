@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichoosr.Domain", "Ichoosr.Domain\Ichoosr.Domain.csproj", "{D1C7B8BF-7B78-4841-BFDF-C7E2C091A1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ichoosr.Domain", "Ichoosr.Domain\Ichoosr.Domain.csproj", "{D1C7B8BF-7B78-4841-BFDF-C7E2C091A1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichoosr.Dal", "Ichoosr.Dal\Ichoosr.Dal.csproj", "{FB69118C-595A-4E8F-A754-F7FB9A5FE721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ichoosr.Dal", "Ichoosr.Dal\Ichoosr.Dal.csproj", "{FB69118C-595A-4E8F-A754-F7FB9A5FE721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichoosr.Web", "Ichoosr.Web\Ichoosr.Web.csproj", "{7B8551A7-0888-417D-8124-CF959E42EA39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ichoosr.Web", "Ichoosr.Web\Ichoosr.Web.csproj", "{7B8551A7-0888-417D-8124-CF959E42EA39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichoosr.Api", "Ichoosr.Api\Ichoosr.Api.csproj", "{37B90570-6FF4-48D5-B3D5-275FB9A89D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ichoosr.Api", "Ichoosr.Api\Ichoosr.Api.csproj", "{37B90570-6FF4-48D5-B3D5-275FB9A89D04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichoosr.Business", "Ichoosr.Business\Ichoosr.Business.csproj", "{A7034452-E99E-4D67-980D-FAEE14D6ECC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{37B90570-6FF4-48D5-B3D5-275FB9A89D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37B90570-6FF4-48D5-B3D5-275FB9A89D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37B90570-6FF4-48D5-B3D5-275FB9A89D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7034452-E99E-4D67-980D-FAEE14D6ECC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7034452-E99E-4D67-980D-FAEE14D6ECC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7034452-E99E-4D67-980D-FAEE14D6ECC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7034452-E99E-4D67-980D-FAEE14D6ECC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

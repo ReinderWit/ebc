@@ -1,7 +1,6 @@
 ﻿using Ichoosr.Domain.Interfaces;
 using Ichoosr.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,19 +10,17 @@ namespace Ichoosr.Api.Controllers
     [Route("[controller]")]
     public class CameraController : ControllerBase
     {
-        private readonly ILogger<CameraController> _logger;
-        private readonly ICameraRepository _cameraRepo;
+        private readonly ICameraService _cameraService;
 
-        public CameraController(ICameraRepository cameraRepository, ILogger<CameraController> logger)
+        public CameraController(ICameraRepository cameraRepository, ICameraService cameraService)
         {
-            _cameraRepo = cameraRepository;
-            _logger = logger;
+            _cameraService = cameraService;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Camera>> Get()
         {
-            var cameras = await _cameraRepo.GetAllAsync();
+            var cameras = await _cameraService.FindAllAsync();
             return cameras;
         }
     }

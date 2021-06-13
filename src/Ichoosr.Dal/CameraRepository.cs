@@ -23,9 +23,9 @@ namespace Ichoosr.Dal
             return await Task.FromResult<List<Camera>>(_cameras);
         }
 
-        private async Task ReadCsv()
+        private void ReadCsv()
         {
-            var lines = await File.ReadAllLinesAsync(Environment.CurrentDirectory + "/bin/Debug/net5.0/Data/cameras.csv");
+            var lines = File.ReadAllLines(@"C:\Users\reind\Documents\ebc\src\Ichoosr.Dal\bin\Debug\net5.0\Data\cameras.csv");
             foreach (var line in lines.Skip(1))
             {
                 var parts = line.Split(';');

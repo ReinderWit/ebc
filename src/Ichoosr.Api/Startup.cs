@@ -1,3 +1,4 @@
+using Ichoosr.Business;
 using Ichoosr.Dal;
 using Ichoosr.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace Ichoosr.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ichoosr.Api", Version = "v1" });
             });
             services.AddSingleton<ICameraRepository, CameraRepository>();
+            services.AddScoped<ICameraService, CameraService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
