@@ -1,11 +1,8 @@
-﻿using Ichoosr.Domain.Models;
-using Ichoosr.Web.Models;
+﻿using Ichoosr.Web.Models;
+using Ichoosr.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -24,7 +21,8 @@ namespace Ichoosr.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await BuildModel();
+            var builder = new HomepageViewModelBuilder(_clientFactory);
+            var model = await builder.Build();
 
             return View(model);
         }
@@ -35,28 +33,6 @@ namespace Ichoosr.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task<HomepageModel> BuildModel()
-        {
-            var model = new HomepageModel();
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:44366/Camera");
-            request.Headers.Add("Accept", "application/json");
 
-            var client = _clientFactory.CreateClient();
-
-            var response = await client.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-
-                StreamReader reader = new StreamReader(responseStream);
-                string text = reader.ReadToEnd();
-
-                model.Cameras = JsonConvert.DeserializeObject<IEnumerable<Camera>>(text);
-                model.CamerasJson = JsonConvert.SerializeObject(model.Cameras);
-            }
-
-            return model;
-        }
     }
 }

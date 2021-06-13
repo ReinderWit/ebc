@@ -1,15 +1,12 @@
-﻿@model HomepageModel
+﻿@using Ichoosr.Domain.Models
+@using Ichoosr.Web.Models.ViewModels
 
-@{
-    var threes = Model.Cameras.Where(c => c.Number % 3 == 0);
-    var fives = Model.Cameras.Where(c => c.Number % 5 == 0);
-    var threeFives = Model.Cameras.Where(c => c.Number % 3 == 0 && c.Number % 5 == 0);
-    var other = Model.Cameras.Where(c => c.Number % 3 != 0 && c.Number % 5 != 0);
-}
+@model HomepageViewModel
+
 
 <h1>Security cameras Utrecht</h1>
 <div id="map"></div>
-<script>var cameras = @Html.Raw(Model.Cameras)</script>
+<script>var cameras = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Cameras));</script>
 <div id="source">
     source:
     <a href="https://data.overheid.nl/dataset/camera-s">https://data.overheid.nl/dataset/camera-s</a>
@@ -19,114 +16,48 @@
         <tbody>
             <tr>
                 <td>
-                    <table id="column3">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Cameras 3</th>
-                            </tr>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                            </tr>
-                            @foreach (var camera in threes)
-                            {
-                                <tr>
-                                    <td>@camera.Number</td>
-                                    <td>@camera.Name</td>
-                                    <td>@camera.Latitude</td>
-                                    <td>@camera.Longitude</td>
-                                </tr>
-                            }
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    @{ TableTemplate(Model.CamerasThree, "column3", "Cameras 3"); }
                 </td>
                 <td>
-                    <table id="column5">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Cameras 5</th>
-                            </tr>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                            </tr>
-                            @foreach (var camera in fives)
-                            {
-                                <tr>
-                                    <td>@camera.Number</td>
-                                    <td>@camera.Name</td>
-                                    <td>@camera.Latitude</td>
-                                    <td>@camera.Longitude</td>
-                                </tr>
-                            }
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    @{ TableTemplate(Model.CamerasFive, "column5", "Cameras 5"); }
                 </td>
                 <td>
-                    <table id="column15">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Cameras 3 &amp; 5</th>
-                            </tr>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                            </tr>
-                            @foreach (var camera in threeFives)
-                            {
-                                <tr>
-                                    <td>@camera.Number</td>
-                                    <td>@camera.Name</td>
-                                    <td>@camera.Latitude</td>
-                                    <td>@camera.Longitude</td>
-                                </tr>
-                            }
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    @{ TableTemplate(Model.CamerasThreeAndFive, "column15", "Cameras 3 & 5"); }
                 </td>
                 <td>
-                    <table id="columnOther">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Cameras Overig</th>
-                            </tr>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                            </tr>
-                            @foreach (var camera in other)
-                            {
-                                <tr>
-                                    <td>@camera.Number</td>
-                                    <td>@camera.Name</td>
-                                    <td>@camera.Latitude</td>
-                                    <td>@camera.Longitude</td>
-                                </tr>
-                            }
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    @{ TableTemplate(Model.CamerasOther, "columnOther", "Cameras Overig"); }
                 </td>
             </tr>
         </tbody>
     </table>
 </main>
-@foreach (var camera in Model.Cameras)
-{
-    <text>hoi</text>
+
+@{
+    void TableTemplate(IEnumerable<Camera> cameras, string tableId, string title)
+    {
+        <table id="@tableId">
+            <thead>
+                <tr>
+                    <th colspan="4">@title</th>
+                </tr>
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                </tr>
+                @foreach (var camera in cameras)
+                {
+                    <tr>
+                        <td>@camera.Number</td>
+                        <td>@camera.Name</td>
+                        <td>@camera.Latitude</td>
+                        <td>@camera.Longitude</td>
+                    </tr>
+                }
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    }
 }
