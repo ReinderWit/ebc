@@ -9,9 +9,16 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoicmVpbmRlcndpdCIsImEiOiJja3B0aHNzZWEwc2NoMm5tbnBqNDczMmM1In0.msrou7NTfQRrFjoaypnFSw'
 }).addTo(mymap);
 
+var markers = [];
+
 for (var i = 0; i < cameras.length; i++) {
     var obj = cameras[i];
     console.log(obj['Latitude']);
     var marker = L.marker([obj['Latitude'], obj['Longitude']]).addTo(mymap);
     marker.bindPopup(`<b>${obj['Name']}</b><br>${obj['Number']}`);
+    markers.push(marker);
 }
+
+var group = new L.featureGroup(markers);
+
+mymap.fitBounds(group.getBounds());
